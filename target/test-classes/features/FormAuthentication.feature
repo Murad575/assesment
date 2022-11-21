@@ -1,8 +1,6 @@
 @login
 Feature: Form Authentication
 
-
-
   Scenario: Login with valid credentials
     Given user opens the Form Authentication page
     When user logs in with valid credentials

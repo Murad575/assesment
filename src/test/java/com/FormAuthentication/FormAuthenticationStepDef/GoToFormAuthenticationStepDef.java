@@ -11,7 +11,7 @@ import org.junit.Assert;
 
 public class GoToFormAuthenticationStepDef {
 
-    GoToFormAuthenticationPage login;
+    GoToFormAuthenticationPage authenticationPage = new GoToFormAuthenticationPage();
     String username= "tomsmith";
     String password = "SuperSecretPassword!";
     String successMessageStr = "You logged into a secure area!";
@@ -28,73 +28,91 @@ public class GoToFormAuthenticationStepDef {
 
     @When("user logs in with valid credentials")
     public void user_logs_in_with_valid_credentials() {
-        login.userNameElement.sendKeys(username);
-        login.passwordElement.sendKeys(password);
-        login.loginButtonElement.click();
+        authenticationPage.userNameElement.sendKeys(username);
+        authenticationPage.passwordElement.sendKeys(password);
+        authenticationPage.loginButtonElement.click();
     }
 
     @Then("the success message should be visible {string}")
     public void the_success_message_should_be_visible(String string) {
-        String str = login.successMessage.getText().trim();
-        Assert.assertEquals(str,successMessageStr);
-        Assert.assertEquals(str,string);
-
+        String str = authenticationPage.successMessage.getText().trim();
+        if(str.contains(successMessageStr)){
+            Assert.assertTrue(true);
+        }else {
+            Assert.assertTrue(false);
+        }
     }
 
 
     @When("user logs in with invalid credentials")
     public void user_logs_in_with_invalid_credentials() {
-        login.userNameElement.sendKeys("username");
-        login.passwordElement.sendKeys("password");
-        login.loginButtonElement.click();
+        authenticationPage.userNameElement.sendKeys("username");
+        authenticationPage.passwordElement.sendKeys("password");
+        authenticationPage.loginButtonElement.click();
     }
 
 
     @Then("the error message should be visible {string}")
     public void the_error_message_should_be_visible(String string) {
-        String str = login.successMessage.getText().trim();
-        Assert.assertEquals(str,invalidUsernameErrorMessage);
-        Assert.assertEquals(str,string);
+        String str = authenticationPage.successMessage.getText().trim();
+        if(str.contains(invalidUsernameErrorMessage)){
+            Assert.assertTrue(true);
+        }else {
+            Assert.assertTrue(false);
+        }
+
     }
 
     @When("user logs in with invalid username")
     public void user_logs_in_with_invalid_username() {
-        login.userNameElement.sendKeys("username");
-        login.passwordElement.sendKeys(password);
-        login.loginButtonElement.click();
+        authenticationPage.userNameElement.sendKeys("username");
+        authenticationPage.passwordElement.sendKeys(password);
+        authenticationPage.loginButtonElement.click();
     }
 
     @Then("the error message should be visible for invalid username {string}")
     public void the_error_message_should_be_visible_for_invalid_username(String string) {
-        String str = login.successMessage.getText().trim();
-        Assert.assertEquals(str,invalidUsernameErrorMessage);
-        Assert.assertEquals(str,string);
+        String str = authenticationPage.successMessage.getText().trim();
+        if(str.contains(invalidUsernameErrorMessage)){
+            Assert.assertTrue(true);
+        }else {
+            Assert.assertTrue(false);
+        }
+
     }
 
     @When("user logs in with invalid Password")
     public void user_logs_in_with_invalid_Password() {
-        login.userNameElement.sendKeys(username);
-        login.passwordElement.sendKeys("password");
-        login.loginButtonElement.click();
+        authenticationPage.userNameElement.sendKeys(username);
+        authenticationPage.passwordElement.sendKeys("password");
+        authenticationPage.loginButtonElement.click();
     }
 
     @Then("the error message should be visible for invalid password {string}")
     public void the_error_message_should_be_visible_for_invalid_password(String string) {
-        String str = login.successMessage.getText().trim();
-        Assert.assertEquals(str,invalidPasswordErrorMessage);
-        Assert.assertEquals(str,string);
+        String str = authenticationPage.successMessage.getText().trim();
+        if(str.contains(invalidPasswordErrorMessage)){
+            Assert.assertTrue(true);
+        }else {
+            Assert.assertTrue(false);
+        }
+
     }
 
     @When("user logs in with empty username and password")
     public void user_logs_in_with_empty_username_and_password() {
-        login.loginButtonElement.click();
+        authenticationPage.loginButtonElement.click();
     }
 
     @Then("the error message should be visible for empty credentials {string}")
     public void the_error_message_should_be_visible_for_empty_credentials(String string) {
-        String str = login.successMessage.getText().trim();
-        Assert.assertEquals(str,invalidUsernameErrorMessage);
-        Assert.assertEquals(str,string);
+        String str = authenticationPage.successMessage.getText().trim();
+        if(str.contains(invalidUsernameErrorMessage)){
+            Assert.assertTrue(true);
+        }else {
+            Assert.assertTrue(false);
+        }
+
     }
 
 
